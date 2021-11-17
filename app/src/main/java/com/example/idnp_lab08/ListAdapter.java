@@ -14,11 +14,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     private List<Ruta> mRutas;
     private LayoutInflater mInflater;
     private Context context;
+    final ListAdapter.OnItemClickListener listener;
 
-    public ListAdapter(List<Ruta> itemList, Context context){
+    public interface OnItemClickListener{
+        void onItemClick(Ruta item);
+    }
+
+    public ListAdapter(List<Ruta> itemList, Context context, ListAdapter.OnItemClickListener listener){
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.mRutas = itemList;
+        this.listener=listener;
     }
 
     @Override
@@ -58,6 +64,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
             empresa.setText(item.getEmpresa());
             ruta.setText(item.getLetraRuta());
             horario.setText(item.getHorario());
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    listener.onItemClick(item);
+                }
+            });
         }
     }
 }
