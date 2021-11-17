@@ -1,6 +1,6 @@
 package com.example.idnp_lab08;
-
-public class Ruta {
+import java.io.Serializable;
+public class Ruta implements Serializable {
     public String empresa;
     public String letraRuta;
     public String horario;
